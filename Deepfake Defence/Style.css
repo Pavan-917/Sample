@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fafafa;
+}
+.login-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.login-form {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    padding: 40px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 320px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+.login-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #262626;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    background: #fafafa;
+    font-size: 1rem;
+}
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background: #0095f6;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.login-form button:hover {
+    background: #1877f2;
+}
+.login-footer {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #8e8e8e;
+    text-align: center;
+}
+.login-footer a {
+    color: #0095f6;
+    text-decoration: none;
+    margin-left: 5px;
+}
+.navbar {
+    background: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.navbar .logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: #262626;
+    letter-spacing: 2px;
+}
+.navbar .search {
+    margin-left: 40px;
+    padding: 7px 15px;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    background: #fafafa;
+    font-size: 1rem;
+}
+.navbar .nav-icons {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.navbar .nav-icons i {
+    font-size: 1.5rem;
+    color: #262626;
+    cursor: pointer;
+}
+.login-btn {
+    padding: 7px 18px;
+    background: #0095f6;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 20px;
+}
+.login-btn:hover {
+    background: #1877f2;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.feed {
+    width: 470px;
+    margin-right: 40px;
+}
+.post {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    margin-bottom: 30px;
+}
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+}
+.post-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 1px solid #dbdbdb;
+}
+.post-header .username {
+    font-weight: bold;
+    color: #262626;
+}
+.post-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-bottom: 1px solid #dbdbdb;
+}
+.post-actions {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 15px;
+}
+.post-actions i {
+    font-size: 1.5rem;
+    color: #262626;
+    cursor: pointer;
+}
+.post-likes, .post-caption {
+    padding: 0 14px 10px 14px;
+    color: #262626;
+}
+.sidebar {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.profile img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-right: 16px;
+    border: 1px solid #dbdbdb;
+}
+.profile-info .username {
+    font-weight: bold;
+    color: #262626;
+}
+.profile-info .name {
+    color: #8e8e8e;
+    font-size: 0.95rem;
+}
+.suggestions {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    padding: 16px;
+}
+.suggestions-title {
+    font-weight: bold;
+    color: #8e8e8e;
+    margin-bottom: 10px;
+}
+.suggestion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.suggestion img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #dbdbdb;
+}
+.suggestion .username {
+    font-weight: bold;
+    color: #262626;
+    font-size: 0.98rem;
+}
+.suggestion .follow {
+    margin-left: auto;
+    color: #0095f6;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+.post-btn {
+    padding: 7px 18px;
+    background: #00c853;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 0.2s, color 0.2s;
+}
+.post-btn:hover {
+    background: #009624;
+}
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .sidebar {
+        display: none;
+    }
+}

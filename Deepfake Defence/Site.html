@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deepfake Defence</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <!-- Main Content (Home Page) -->
+    <div id="main-content">
+        <div class="navbar">
+            <span class="logo">Deepfake Defence</span>
+            <input class="search" type="text" placeholder="Search">
+            <div class="nav-icons">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-paper-plane"></i>
+                <i class="fa-regular fa-user"></i>
+                <button id="login-btn" class="login-btn">Login</button>
+                <button id="post-btn" class="post-btn">Post</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="feed" id="feed">
+                <div class="post">
+                    <div class="post-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile">
+                        <span class="username">john_doe</span>
+                    </div>
+                    <img class="post-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="post">
+                    <div class="post-actions">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-comment"></i>
+                        <i class="fa-regular fa-paper-plane"></i>
+                    </div>
+                    <div class="post-likes">1,024 likes</div>
+                    <div class="post-caption"><span class="username">john_doe</span> Enjoying the view! #nature</div>
+                </div>
+                <div class="post">
+                    <div class="post-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="profile">
+                        <span class="username">jane_smith</span>
+                    </div>
+                    <img class="post-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80" alt="post">
+                    <div class="post-actions">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-comment"></i>
+                        <i class="fa-regular fa-paper-plane"></i>
+                    </div>
+                    <div class="post-likes">2,341 likes</div>
+                    <div class="post-caption"><span class="username">jane_smith</span> City lights at night ✨</div>
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile">
+                    <div class="profile-info">
+                        <div class="username">Guest</div>
+                        <div class="name">Welcome, Guest!</div>
+                    </div>
+                </div>
+                <div class="suggestions">
+                    <div class="suggestions-title">Suggestions For You</div>
+                    <div class="suggestion">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="profile">
+                        <span class="username">alex_king</span>
+                        <span class="follow">Follow</span>
+                    </div>
+                    <div class="suggestion">
+                        <img src="https://randomuser.me/api/portraits/women/47.jpg" alt="profile">
+                        <span class="username">emma_wat</span>
+                        <span class="follow">Follow</span>
+                    </div>
+                    <div class="suggestion">
+                        <img src="https://randomuser.me/api/portraits/men/48.jpg" alt="profile">
+                        <span class="username">mike_ross</span>
+                        <span class="follow">Follow</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal -->
+    <div id="login-modal" class="login-modal" style="display:none;">
+        <form class="login-form" onsubmit="return showMainContent(event)">
+            <div class="login-logo">Deepfake Defence</div>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+            <div class="login-footer">
+                <span>Don't have an account?</span>
+                <a href="#">Sign up</a>
+            </div>
+        </form>
+    </div>
+    <!-- Post Modal -->
+    <div id="post-modal" class="login-modal" style="display:none;">
+        <form class="login-form" onsubmit="return handlePost(event)">
+            <div class="login-logo">Create Post</div>
+            <input id="post-caption" type="text" placeholder="Caption" required>
+            <input id="post-image" type="file" accept="image/*" required>
+            <button type="submit">Upload</button>
+            <div id="post-error" style="color:red; margin-top:10px; display:none;"></div>
+        </form>
+    </div>
+    <!-- Upload Form (for testing) -->
+    <form action="/upload" method="post" enctype="multipart/form-data" class="login-form" style="margin:20px 0;">
+        <input name="caption" type="text" placeholder="Caption" required>
+        <input name="image" type="file" accept="image/*" required>
+        <button type="submit">Upload</button>
+    </form>
+    <!-- Display uploaded images (for testing) -->
+    <div class="feed" id="feed">
+        {% for image in images %}
+        <div class="post">
+            <div class="post-header">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile">
+                <span class="username">User</span>
+            </div>
+            <img class="post-img" src="{{ url_for('uploaded_file', filename=image.original) }}" alt="Original">
+            <div class="post-caption">{{ image.caption }}</div>
+            <div class="post-caption">
+                <a href="{{ url_for('blurred_file', filename=image.blurred) }}" target="_blank">View Blurred Version</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        // Show login modal when login button is clicked
+        document.getElementById('login-btn').onclick = function() {
+            document.getElementById('login-modal').style.display = '';
+            document.getElementById('main-content').style.filter = 'blur(3px)';
+        };
+        // Show post modal when post button is clicked
+        document.getElementById('post-btn').onclick = function() {
+            document.getElementById('post-modal').style.display = '';
+            document.getElementById('main-content').style.filter = 'blur(3px)';
+        };
+        // Show main content after login
+        function showMainContent(event) {
+            event.preventDefault();
+            document.getElementById('login-modal').style.display = 'none';
+            document.getElementById('main-content').style.filter = '';
+            // Optionally, update profile to show logged-in user
+            document.querySelector('.profile-info .username').textContent = 
+                document.querySelector('.login-form input[type="text"]').value;
+            document.querySelector('.profile-info .name').textContent = "Welcome!";
+            return false;
+        }
+        // Handle post upload
+        function handlePost(event) {
+            event.preventDefault();
+            var caption = document.getElementById('post-caption').value;
+            var fileInput = document.getElementById('post-image');
+            var file = fileInput.files[0];
+            if (!file) {
+                document.getElementById('post-error').textContent = "Please select an image.";
+                document.getElementById('post-error').style.display = '';
+                return false;
+            }
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var imgSrc = e.target.result;
+                var feed = document.getElementById('feed');
+                var username = document.querySelector('.profile-info .username').textContent || "Guest";
+                var postHTML = `
+                <div class="post">
+                    <div class="post-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="profile">
+                        <span class="username">${username}</span>
+                    </div>
+                    <img class="post-img" src="${imgSrc}" alt="post">
+                    <div class="post-actions">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-comment"></i>
+                        <i class="fa-regular fa-paper-plane"></i>
+                    </div>
+                    <div class="post-likes">0 likes</div>
+                    <div class="post-caption"><span class="username">${username}</span> ${caption}</div>
+                </div>
+                `;
+                feed.insertAdjacentHTML('afterbegin', postHTML);
+                document.getElementById('post-modal').style.display = 'none';
+                document.getElementById('main-content').style.filter = '';
+                document.getElementById('post-error').style.display = 'none';
+                document.getElementById('post-caption').value = '';
+                document.getElementById('post-image').value = '';
+            };
+            reader.readAsDataURL(file);
+            return false;
+        }
+    </script>
+</body>
+</html>
